@@ -1,7 +1,7 @@
-Projeto Final de Programação Web
+<h1>Projeto Final de Programação Web</h1>
 
-Nome: HAVEN COWORKING E COFFE
-<img src="C:\Users\Tayane Silva\Pictures\Screenshots\Captura de tela 2025-04-11 135256.png" alt="Logo da Minha Empresa">
+<h2>Nome: HAVEN COWORKING E COFFE</h2>
+<img src="" alt="Logo da Minha Empresa">
 
 Techs Usadas:
 
