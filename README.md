@@ -1,7 +1,7 @@
 <h1>Projeto Final de Programação Web</h1>
 
 <h2>Nome: HAVEN COWORKING E COFFE</h2>
-![Logo do projeto](Captura de tela 2025-04-11 135256.png)
+<div align="center"> <img src="Captura de tela 2025-04-11 135256.png" alt="Logo Haven Coworking" width="300"> </div>
 Techs Usadas:
 
 Funções:
