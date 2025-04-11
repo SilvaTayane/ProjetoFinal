@@ -2,9 +2,14 @@
 
 <h2>Nome: HAVEN COWORKING E COFFE</h2>
 <div align="center"> <img src="Captura de tela 2025-04-11 135256.png" alt="Logo Haven Coworking" width="300"> </div>
-Techs Usadas:
 
-Funções:
+## **✨ Funcionalidades**
 
-Agendamentos de mesas, salas de reunião e computadores
-Compras dos produtos da cafeteria
+### **✅ Agendamentos**
+- Reserva de mesas individuais
+- Aluguel de salas de reunião por período
+- Uso de computadores compartilhados
+
+### **✅ Cafeteria Online**
+- Cardápio digital com produtos (cafés, lanches, etc.)
+- Carrinho de compras e checkout
