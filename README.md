@@ -1,7 +1,7 @@
 <h1>Projeto Final de Programação Web</h1>
 
 <h2>Nome: HAVEN COWORKING E COFFE</h2>
-<img src="" alt="Logo da Minha Empresa">
+![Logo do projeto](https://github.com/seu-usuario/projetoFinal/blob/main/images/logo.png)
 
 Techs Usadas:
 
