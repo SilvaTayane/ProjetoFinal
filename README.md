@@ -1,6 +1,6 @@
 <h1>Projeto Final de Programação Web</h1>
 
-<h2>Nome: HAVEN COWORKING E COFFE</h2>
+<h2>HAVEN COWORKING E COFFE</h2>
 <div align="center"> <img src="Captura de tela 2025-04-11 135256.png" alt="Logo Haven Coworking" width="300"> </div>
 
 ## **✨ Funcionalidades**
@@ -13,3 +13,6 @@
 ### **✅ Cafeteria Online**
 - Cardápio digital com produtos (cafés, lanches, etc.)
 - Carrinho de compras e checkout
+- 
+## **🖥️ Techs Utilizadas**
+  
