@@ -12,7 +12,7 @@
 
 ### **✅ Cafeteria Online**
 - Cardápio digital com produtos (cafés, lanches, etc.)
-- Carrinho de compras e checkout
-- 
+- Compra dos produtos
+
 ## **🖥️ Techs Utilizadas**
   
