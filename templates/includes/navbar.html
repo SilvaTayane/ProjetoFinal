@@ -1,0 +1,72 @@
+{% load static %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg custom-navbar reduced-margin">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      data-mdb-collapse-init
+      class="navbar-toggler"
+      type="button"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="#">
+        <img
+          src="{% static '/semfundo.png' %}"
+          height="80"
+          alt="MDB Logo"
+          loading="lazy"
+        />
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Spaces</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Plans</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Reservations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Coffe</a>
+        </li>
+      </ul>
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<!-- Estilos personalizados -->
+<style>
+  .custom-navbar {
+    background-color: #ced4da !important; /* $gray-400 */
+  }
+
+  .navbar-nav .nav-link {
+    font-weight: bold;
+  }
+
+  .reduced-margin {
+    margin: 0 !important;         /* remove margens externas */
+    padding-top: 0.25rem;         /* padding interno reduzido */
+    padding-bottom: 0.25rem;
+  }
+
+  
+</style>

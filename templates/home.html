@@ -1,0 +1,25 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Seção com imagem de fundo -->
+<section class="bg-section d-flex align-items-center justify-content-center text-white">
+    <div class="text-center">
+      <h1>Bem-vindo ao Espaço</h1>
+      <p>Conheça nossos ambientes e planos incríveis!</p>
+    </div>
+  </section>
+  
+  <!-- Estilo embutido -->
+  <style>
+    .bg-section {
+      background-image: url('{% static "sua-imagem.jpg" %}');
+      background-size: cover;
+      background-position: center;
+      height: 400px; /* altura da seção */
+      padding: 2rem;
+    }
+  </style>
+  
+
+{% endblock content %}
