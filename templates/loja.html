@@ -2,143 +2,71 @@
 {% load static %}
 
 {% block content %}
-<section class="section-pagetop bg">
-    <div class="container">
-        <h2 class="title-page">Our Store</h2>
-        
-    </div> <!-- container //  -->
-    </section>
-    <!-- ========================= SECTION INTRO END// ========================= -->
-    
-    <!-- ========================= SECTION CONTENT ========================= -->
-    <section class="section-content padding-y">
-    <div class="container">
-    
+<div class="container mb-4">
     <div class="row">
-        <aside class="col-md-3">
-            
-    <div class="card">
-        <article class="filter-group">
-            <header class="card-header">
-                <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
-                    <i class="icon-control fa fa-chevron-down"></i>
-                    <h6 class="title">Categories</h6>
-                </a>
-            </header>
-            <div class="filter-content collapse show" id="collapse_1" style="">
-                <div class="card-body">
-                    
-                    <ul class="list-menu">
-                        <li><a href="{% url 'loja' %}">Todos </a></li>
-                    {% for cat in opcoes %}
-                    <li><a href="{{ cat.get_url }}">{{ cat.categoria_nome }} </a></li>
-                    {% endfor %}
-                    </ul>
-    
-                </div> <!-- card-body.// -->
-            </div>
-        </article> <!-- filter-group  .// -->
-        
-        
-        <article class="filter-group">
-            <header class="card-header">
-                <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
-                    <i class="icon-control fa fa-chevron-down"></i>
-                    <h6 class="title">Price range </h6>
-                </a>
-            </header>
-            <div class="filter-content collapse show" id="collapse_3" style="">
-                <div class="card-body">
-                    
-                    <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label>Min</label>
-                      <!-- <input class="form-control" placeholder="$0" type="number"> -->
-                          <select class="mr-2 form-control">
-                            <option value="0">$0</option>
-                            <option value="50">$50</option>
-                            <option value="100">$100</option>
-                            <option value="150">$150</option>
-                            <option value="200">$200</option>
-                            <option value="500">$500</option>
-                            <option value="1000">$1000</option>
-                        </select>
-                    </div>
-                    <div class="form-group text-right col-md-6">
-                      <label>Max</label>
-                          <select class="mr-2 form-control">
-                            <option value="50">$50</option>
-                            <option value="100">$100</option>
-                            <option value="150">$150</option>
-                            <option value="200">$200</option>
-                            <option value="500">$500</option>
-                            <option value="1000">$1000</option>
-                            <option value="2000">$2000+</option>
-                        </select>
-                    </div>
-                    </div> <!-- form-row.// -->
-                    <button class="btn btn-block btn-primary">Apply</button>
-                </div><!-- card-body.// -->
-            </div>
-        </article> <!-- filter-group .// -->
-        
-    </div> <!-- card.// -->
-    
-        </aside> <!-- col.// -->
-        <main class="col-md-9">
-    
-    <header class="border-bottom mb-4 pb-3">
-            <div class="form-inline">
-                <span class="mr-md-auto">{{ prod_quant }} Items found </span>
-                
-            </div>
-    </header><!-- sect-heading -->
-    
-    <div class="row">
-        {% for prod in produtos %}
-        <div class="col-md-4">
-            <figure class="card card-product-grid">
-                <div class="img-wrap"> 
-                    {% if prod.imagens %}
-                        <img src="{{ prod.imagens.url }}">
-                    {% else %}
-                        <h2>Não possui imagens</h2>
-                    {% endif %}
-                    
-                </div> <!-- img-wrap.// -->
-                <figcaption class="info-wrap">
-                    <div class="fix-height">
-                        <a href="./product-detail.html" class="title">{{prod.produto_nome}}</a>
-                        <div class="price-wrap mt-2">
-                            <span class="price">{{ prod.preco }}</span>
-                            <del class="price-old">{{ prod.preco }}</del>
-                        </div> <!-- price-wrap.// -->
-                    </div>
-                    <a href="#" class="btn btn-block btn-success">Added to cart </a>
-                </figcaption>
-            </figure>
-        </div> <!-- col.// -->
-    
-              
-        {% endfor %} 
-    </div> <!-- row end.// -->
-    
-    
-    <nav class="mt-4" aria-label="Page navigation sample">
-      <ul class="pagination">
-        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul>
-    </nav>
-    
-        </main> <!-- col.// -->
-    
+        <div class="col-12 text-center">
+            <h1 class="display-5 fw-bold text-gradient" style="
+                background: linear-gradient(45deg, #333942, #515e61);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                position: relative;
+                padding-bottom: 15px;
+            ">
+                Nossos Produtos
+                <span class="position-absolute bottom-0 start-50 translate-middle-x" style="
+                    width: 80px;
+                    height: 3px;
+                    background: linear-gradient(45deg, #20252b, #9dcdd8);
+                    border-radius: 3px;
+                "></span>
+            </h1>
+            <p class="lead text-muted">Um café melhora o dia!</p>
+        </div>
     </div>
-    
-    </div> <!-- container .//  -->
-    </section>
+</div>
+<section class="product-section py-3">
+  <div class="container">
+    <div class="row justify-content-center">
+
+      {% for prod in produtos %}
+      <div class="col-md-4 col-lg-3 mb-4">
+        <div class="card h-100">
+          <!-- Imagem do produto (tamanho reduzido) -->
+          <img src="{{ prod.imagens.url }}" class="card-img-top img-fluid" style="max-height: 180px; object-fit: contain;" alt="{{ prod.produto_nome }}">
+          
+          <div class="card-body d-flex flex-column p-3">
+            <!-- Descrição do produto -->
+            <h5 class="card-title fs-6">{{ prod.produto_nome }}</h5>
+            <p class="card-text small text-muted">{{ prod.descricao }}</p>
+            
+            <!-- Preço do produto -->
+            <div class="mt-auto">
+              <h4 class="text-dark fs-5 mb-2">R$ {{ prod.preco }}</h4>
+              
+              <!-- Botão para adicionar ao carrinho -->
+              <button class="btn btn-sm btn-outline-secondary w-100 transition-all">
+  <i class="bi bi-cart-plus"></i> Adicionar
+</button>
+
+<style>
+  .transition-all {
+    transition: all 0.3s ease;
+  }
+  .transition-all:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+</style>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
 
 {% endblock content %}
