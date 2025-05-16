@@ -1,26 +1,28 @@
 {% load static %}
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg custom-navbar reduced-margin">
-  <!-- Container wrapper -->
   <div class="container-fluid">
-    <!-- Collapsible wrapper -->
+    <!-- Brand/logo and toggle button -->
+    <a class="navbar-brand" href="#">
+      <img
+        src="{% static '/cadeado.png' %}"
+        class="navbar-logo"
+        alt="MDB Logo"
+      />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Navbar brand -->
-      <a class="navbar-brand mt-2 mt-lg-0" href="#">
-        <img
-          src="{% static '/semfundo.png' %}"
-          height="80"
-          alt="MDB Logo"
-          loading="lazy"
-        />
-      </a>
-      <!-- Left links -->
+      <!-- Centered navigation links -->
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'home' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Spaces</a>
+          <a class="nav-link" href="{% url 'salas' %}">Spaces</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Plans</a>
@@ -33,11 +35,8 @@
         </li>
       </ul>
     </div>
-    <!-- Collapsible wrapper -->
   </div>
-  <!-- Container wrapper -->
 </nav>
-<!-- Navbar -->
 
 <!-- Estilos personalizados -->
 <style>
@@ -47,11 +46,41 @@
 
   .navbar-nav .nav-link {
     font-weight: bold;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
   }
 
   .reduced-margin {
-    margin: 0 !important;         /* remove margens externas */
-    padding-top: 0.25rem;         /* padding interno reduzido */
-    padding-bottom: 0.25rem;
+    margin: 0 !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 80px; /* Altura mínima da navbar */
+  }
+
+  .navbar-logo {
+    height: 70px; /* Tamanho aumentado da imagem */
+    width: auto;
+    transition: all 0.3s ease;
+  }
+
+  /* Ajustes para dispositivos móveis */
+  @media (max-width: 991.98px) {
+    .reduced-margin {
+      min-height: auto;
+    }
+    
+    .navbar-logo {
+      height: 50px; /* Tamanho menor em mobile */
+    }
+    
+    .navbar-nav {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+
+  /* Efeito hover nos links */
+  .nav-link:hover {
+    transform: translateY(-2px);
   }
 </style>
