@@ -1,64 +1,69 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
 
 <section class="container my-5">
   <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
+    {% for sala in salas %}
+    <div class="col-md-6 col-lg-4 mb-4">
       <div class="card shadow-sm border-0 overflow-hidden">
         <!-- Imagem com efeito de zoom -->
         <div class="image-hover-zoom">
-          <img src="{% static 'im1.jpg' %}" class="card-img-top" alt="Imagem da Sala">
+          <img src="{{ sala.sala_imagem.url }}" class="card-img-top" alt="Imagem da Sala">
         </div>
         
         <div class="card-body">
           <!-- Descrição -->
-          <h5 class="card-title">Sala de Reuniões Premium</h5>
-          <p class="card-text">Sala equipada com tecnologia de ponta, ideal para reuniões e apresentações profissionais.</p>
+          <h5 class="card-title">{{ sala.nome_sala }}</h5>
+          <p class="card-text">{{ sala.descricao_sala }}</p>
           
           <!-- Informações -->
           <ul class="list-group list-group-flush mb-3">
             <li class="list-group-item d-flex justify-content-between align-items-center">
               Preço por hora:
-              <span class="badge bg-primary rounded-pill">R$ 120,00</span>
+              <span class="fs-4 fw-bold">R$ {{ sala.preco_por_hora }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
               Capacidade:
-              <span class="badge bg-success rounded-pill">12 pessoas</span>
+              <span class="fs-4 fw-bold">{{ sala.capacidade }}</span>
             </li>
           </ul>
           
           <!-- Botão de alugar -->
           <div class="d-grid">
-            <button class="btn btn-sm btn-outline-secondary w-100 transition-all">
-  <i class="bi bi-cart-plus"></i> Alugar
-</button>
+            <a href="#" class="btn btn-sm btn-outline-secondary w-100 transition-all">
+              <i class="bi bi-cart-plus"></i> Alugar
+            </a>
           </div>
         </div>
       </div>
     </div>
+    {% endfor %}
   </div>
 </section>
 
 <!-- Estilos personalizados -->
 <style>
   .image-hover-zoom {
-    overflow: hidden; /* Esconde qualquer overflow da imagem */
+    overflow: hidden;
+    height: 200px; /* Altura fixa para consistência */
   }
   
   .image-hover-zoom img {
     transition: transform .5s ease;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
   }
   
   .image-hover-zoom:hover img {
-    transform: scale(1.1); /* Aumenta a imagem em 10% */
+    transform: scale(1.1);
   }
   
   .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
   }
   
   .card:hover {
