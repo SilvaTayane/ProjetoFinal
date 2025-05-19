@@ -9,4 +9,5 @@ urlpatterns = [
     path('', views.visualizarHome, name='home'),
     path('loja/', include('produtos.urls')),
     path('sala/', include('salas.urls')),
+    path('reserva/', include('reservas.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
