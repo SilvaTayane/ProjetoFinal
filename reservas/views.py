@@ -1,5 +1,18 @@
 from django.shortcuts import render
+from datetime import datetime
+from reservas.form import ReservaForm
 
-# Create your views here.
+
+
 def VisualizarReserva(request):
-    return render(request, 'reserva.html')
+    if request.method == 'POST':
+        form = ReservaForm(request.POST)
+        if form.is_valid():
+            reserva = form.save()
+            return render('detalhes_reserva')
+    else:
+        form = ReservaForm(initial={
+            'data_reserva': datetime.now().date()  # Usando datetime.now()
+        })
+    
+    return render(request, 'reserva.html', {'form': form})

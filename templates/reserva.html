@@ -11,67 +11,111 @@
           <h3 class="text-center font-weight-light my-4">Reserva de Espaço</h3>
         </div>
         <div class="card-body">
-          <form method="post" class="needs-validation" novalidate>
+          <form action="{% url 'reservas' %}" method="post" class="needs-validation" novalidate>
             {% csrf_token %}
             
+            <!-- Exibir erros não relacionados a campos específicos -->
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+              {% for error in form.non_field_errors %}
+                {{ error }}
+              {% endfor %}
+            </div>
+            {% endif %}
+
             <!-- Campo Sala -->
             <div class="mb-4">
-              <label for="sala" class="form-label fw-bold">Sala</label>
-              <select id="sala" name="sala" class="form-select form-select-lg py-3" required>
-                <option value="">Selecione uma sala</option>
-                <option value="Sala 1">Sala 1 - Capacidade: 4 pessoas</option>
-                <option value="Sala 2">Sala 2 - Capacidade: 6 pessoas</option>
-                <option value="Sala 3">Sala 3 - Capacidade: 8 pessoas</option>
-              </select>
-              <div class="invalid-feedback">Por favor, selecione uma sala.</div>
+              <label for="{{ form.sala_de_reserva.id_for_label }}" class="form-label fw-bold">
+                {{ form.sala_de_reserva.label }}
+              </label>
+              {{ form.sala_de_reserva }}
+              {% if form.sala_de_reserva.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.sala_de_reserva.errors.0 }}
+                </div>
+              {% endif %}
             </div>
 
             <div class="row g-3 mb-4">
               <!-- Campo Nome -->
               <div class="col-md-6">
-                <label for="nome" class="form-label fw-bold">Nome Completo</label>
-                <input type="text" id="nome" name="nome" class="form-control form-control-lg py-3" placeholder="Seu nome completo" required>
-                <div class="invalid-feedback">Por favor, informe seu nome.</div>
+                <label for="{{ form.nome_completo.id_for_label }}" class="form-label fw-bold">
+                  {{ form.nome_completo.label }}
+                </label>
+                {{ form.nome_completo }}
+                {% if form.nome_completo.errors %}
+                  <div class="invalid-feedback d-block">
+                    {{ form.nome_completo.errors.0 }}
+                  </div>
+                {% endif %}
               </div>
 
               <!-- Campo Email -->
               <div class="col-md-6">
-                <label for="email" class="form-label fw-bold">E-mail</label>
-                <input type="email" id="email" name="email" class="form-control form-control-lg py-3" placeholder="seu@email.com" required>
-                <div class="invalid-feedback">Por favor, informe um e-mail válido.</div>
+                <label for="{{ form.email.id_for_label }}" class="form-label fw-bold">
+                  {{ form.email.label }}
+                </label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                  <div class="invalid-feedback d-block">
+                    {{ form.email.errors.0 }}
+                  </div>
+                {% endif %}
               </div>
             </div>
 
             <div class="row g-3 mb-4">
               <!-- Campo CPF -->
               <div class="col-md-6">
-                <label for="cpf" class="form-label fw-bold">CPF</label>
-                <input type="text" id="cpf" name="cpf" class="form-control form-control-lg py-3" 
-                       pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
-                       placeholder="000.000.000-00" required>
-                <small class="form-text text-muted">Formato: 000.000.000-00</small>
-                <div class="invalid-feedback">Por favor, informe um CPF válido.</div>
+                <label for="{{ form.cpf.id_for_label }}" class="form-label fw-bold">
+                  {{ form.cpf.label }}
+                </label>
+                {{ form.cpf }}
+                <small class="form-text text-muted">{{ form.cpf.help_text }}</small>
+                {% if form.cpf.errors %}
+                  <div class="invalid-feedback d-block">
+                    {{ form.cpf.errors.0 }}
+                  </div>
+                {% endif %}
               </div>
 
               <!-- Campo Data -->
               <div class="col-md-6">
-                <label for="data" class="form-label fw-bold">Data da Reserva</label>
-                <input type="date" id="data" name="data" class="form-control form-control-lg py-3" required>
-                <div class="invalid-feedback">Por favor, selecione uma data.</div>
+                <label for="{{ form.data_reserva.id_for_label }}" class="form-label fw-bold">
+                  {{ form.data_reserva.label }}
+                </label>
+                {{ form.data_reserva }}
+                {% if form.data_reserva.errors %}
+                  <div class="invalid-feedback d-block">
+                    {{ form.data_reserva.errors.0 }}
+                  </div>
+                {% endif %}
               </div>
             </div>
 
             <!-- Campos de Horário -->
             <div class="row g-3 mb-4">
               <div class="col-md-6">
-                <label for="inicio_hora" class="form-label fw-bold">Hora de Entrada</label>
-                <input type="time" id="inicio_hora" name="inicio_hora" class="form-control form-control-lg py-3" required>
-                <div class="invalid-feedback">Informe a hora de entrada.</div>
+                <label for="{{ form.hora_entrada.id_for_label }}" class="form-label fw-bold">
+                  {{ form.hora_entrada.label }}
+                </label>
+                {{ form.hora_entrada }}
+                {% if form.hora_entrada.errors %}
+                  <div class="invalid-feedback d-block">
+                    {{ form.hora_entrada.errors.0 }}
+                  </div>
+                {% endif %}
               </div>
               <div class="col-md-6">
-                <label for="final_hora" class="form-label fw-bold">Hora de Saída</label>
-                <input type="time" id="final_hora" name="final_hora" class="form-control form-control-lg py-3" required>
-                <div class="invalid-feedback">Informe a hora de saída.</div>
+                <label for="{{ form.hora_saida.id_for_label }}" class="form-label fw-bold">
+                  {{ form.hora_saida.label }}
+                </label>
+                {{ form.hora_saida }}
+                {% if form.hora_saida.errors %}
+                  <div class="invalid-feedback d-block">
+                    {{ form.hora_saida.errors.0 }}
+                  </div>
+                {% endif %}
               </div>
             </div>
 
@@ -90,6 +134,30 @@
     </div>
   </div>
 </div>
+
+<!-- Adicione isso no final do seu template base ou antes de fechar o body -->
+<script>
+// Validação do frontend
+(function () {
+  'use strict'
+  
+  // Pegue todos os forms que queremos aplicar estilos de validação customizados
+  var forms = document.querySelectorAll('.needs-validation')
+  
+  // Loop sobre eles e previna submissão
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
 
 <style>
   .card {

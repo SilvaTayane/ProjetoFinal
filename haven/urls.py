@@ -10,4 +10,5 @@ urlpatterns = [
     path('loja/', include('produtos.urls')),
     path('sala/', include('salas.urls')),
     path('reserva/', include('reservas.urls')),
+    path('plano/', include('planos.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
