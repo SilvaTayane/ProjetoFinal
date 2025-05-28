@@ -214,5 +214,94 @@
     color: #6c757d !important;
   }
 </style>
+<!-- Modal de Sucesso -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="successModalLabel">
+          <i class="fas fa-check-circle me-2"></i> Reserva Confirmada!
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center mb-4">
+          <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
+        </div>
+        <h4 class="text-center mb-3">Sua reserva foi realizada com sucesso!</h4>
+        <p class="text-center text-muted">
+          Você receberá um e-mail de confirmação com os detalhes da sua reserva.
+          Caso precise de alguma alteração, entre em contato conosco.
+        </p>
+      </div>
+      <div class="modal-footer justify-content-center bg-light">
+        <button type="button" class="btn btn-success px-4 py-2 fw-bold" data-bs-dismiss="modal">
+          <i class="fas fa-thumbs-up me-2"></i> Entendi
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script para mostrar o modal após envio do formulário -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Seleciona o formulário
+  const form = document.querySelector('.needs-validation');
+  
+  // Adiciona um listener para o evento submit
+  form.addEventListener('submit', function(event) {
+    // Verifica se o formulário é válido
+    if (form.checkValidity()) {
+      // Previne o envio padrão (remova esta linha se quiser que o formulário seja enviado)
+      event.preventDefault();
+      
+      // Mostra o modal de sucesso
+      const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+      successModal.show();
+      
+      // Aqui você pode adicionar o código para enviar o formulário via AJAX se necessário
+      // Ou pode remover o event.preventDefault() acima para enviar normalmente
+    }
+  });
+});
+</script>
+
+<!-- Estilo adicional para o modal -->
+<style>
+  .modal-content {
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
+  }
+  
+  .modal-header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg,rgb(84, 87, 85) 0%,rgb(55, 56, 55) 100%);
+  }
+  
+  .modal-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  .modal-body {
+    padding: 2rem;
+  }
+  
+  .btn-success {
+    background: linear-gradient(135deg,rgb(97, 97, 97) 0%,rgb(93, 97, 94) 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+  }
+  
+  .btn-success:hover {
+    background: linear-gradient(135deg,rgb(70, 71, 70) 0%,rgb(61, 65, 62) 100%);
+    transform: translateY(-2px);
+  }
+</style>
 
 {% endblock %}

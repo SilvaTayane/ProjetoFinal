@@ -9,7 +9,7 @@ def VisualizarReserva(request):
         form = ReservaForm(request.POST)
         if form.is_valid():
             reserva = form.save()
-            return render('detalhes_reserva')
+            return render(request, 'reserva.html')
     else:
         form = ReservaForm(initial={
             'data_reserva': datetime.now().date()  # Usando datetime.now()

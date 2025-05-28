@@ -1,6 +1,6 @@
 from django.db import models
 
-class Planos(models.Model):
+class Plano(models.Model):
     TIPO_PLANO_CHOICES = [
         ('semanal', 'Semanal'),
         ('mensal', 'Mensal'),
@@ -11,6 +11,7 @@ class Planos(models.Model):
     tipo_de_sala = models.CharField(max_length=100, null=True, blank=True)
     descricao = models.TextField(null=True, blank=True)
     valor = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    imagens =         models.ImageField(upload_to='fotos/planos',blank=True)
     tipo_plano = models.CharField(max_length=10, choices=TIPO_PLANO_CHOICES, null=True, blank=True)
 
     def __str__(self):
