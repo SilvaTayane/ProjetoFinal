@@ -236,7 +236,7 @@
       </div>
       <div class="modal-footer justify-content-center bg-light">
         <button type="button" class="btn btn-success px-4 py-2 fw-bold" data-bs-dismiss="modal">
-          <i class="fas fa-thumbs-up me-2"></i> Entendi
+          <i class="fas fa-thumbs-up me-2"></i> Fechar
         </button>
       </div>
     </div>
@@ -245,24 +245,42 @@
 
 <!-- Script para mostrar o modal após envio do formulário -->
 <script>
+// Substitua o script principal por este:
 document.addEventListener('DOMContentLoaded', function() {
-  // Seleciona o formulário
   const form = document.querySelector('.needs-validation');
   
-  // Adiciona um listener para o evento submit
   form.addEventListener('submit', function(event) {
-    // Verifica se o formulário é válido
+    event.preventDefault();
+    
     if (form.checkValidity()) {
-      // Previne o envio padrão (remova esta linha se quiser que o formulário seja enviado)
-      event.preventDefault();
-      
-      // Mostra o modal de sucesso
-      const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-      successModal.show();
-      
-      // Aqui você pode adicionar o código para enviar o formulário via AJAX se necessário
-      // Ou pode remover o event.preventDefault() acima para enviar normalmente
+      // Envia o formulário via AJAX
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+          successModal.show();
+          form.reset();
+          form.classList.remove('was-validated');
+        } else {
+          // Mostrar erros do servidor
+          alert(data.error || 'Ocorreu um erro ao processar sua reserva.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Ocorreu um erro de conexão.');
+      });
     }
+    
+    form.classList.add('was-validated');
   });
 });
 </script>
