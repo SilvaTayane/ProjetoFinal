@@ -27,12 +27,11 @@ class ReservaForm(forms.ModelForm):
         
         # Adicionando help_texts
         help_texts = {
-            'cpf': 'Formato: 000.000.000-00',
             'data_reserva': 'Selecione a data desejada',
         }
 
     def clean_cpf(self):
-        cpf = self.cleaned_data['cpf']
+        cpf = self.cleaned_data['CPF']
         # Validação simples do formato do CPF
         if not len(cpf) == 14 or not cpf[3] == '.' or not cpf[7] == '.' or not cpf[11] == '-':
             raise forms.ValidationError("CPF deve estar no formato 000.000.000-00")
