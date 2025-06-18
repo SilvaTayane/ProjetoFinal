@@ -140,5 +140,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'emanuelytayane22@gmail.com'  # Seu e-mail
-EMAIL_HOST_PASSWORD = 'tayane**22'  # Senha ou app password (se usar 2FA)
+EMAIL_HOST_PASSWORD = ''  # Senha ou app password (se usar 2FA)
 DEFAULT_FROM_EMAIL = 'emanuelytayane22@gmail.com'  # E-mail remetente
