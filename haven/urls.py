@@ -11,4 +11,5 @@ urlpatterns = [
     path('sala/', include('salas.urls')),
     path('reserva/', include('reservas.urls')),
     path('plano/', include('planos.urls')),
+    path('carrinho/', include('carrinho.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

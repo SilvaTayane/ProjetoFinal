@@ -5,7 +5,7 @@ from datetime import date  # Importamos date para verificação da data atual
 class ReservaForm(forms.ModelForm):
     class Meta:
         model = Reserva
-        fields = ['sala_de_reserva', 'nome_completo', 'email', 'cpf', 
+        fields = ['sala_de_reserva', 'op', 'email', 'cpf', 
                  'data_reserva', 'hora_entrada', 'hora_saida']
         
         # Personalizando os widgets
@@ -31,7 +31,7 @@ class ReservaForm(forms.ModelForm):
         }
 
     def clean_cpf(self):
-        cpf = self.cleaned_data['CPF']
+        cpf = self.cleaned_data.get('cpf') 
         # Validação simples do formato do CPF
         if not len(cpf) == 14 or not cpf[3] == '.' or not cpf[7] == '.' or not cpf[11] == '-':
             raise forms.ValidationError("CPF deve estar no formato 000.000.000-00")
