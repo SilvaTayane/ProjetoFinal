@@ -3,6 +3,30 @@
 
 {% block content %}
 
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="display-5 fw-bold text-gradient" style="
+                background: linear-gradient(45deg, #333942, #515e61);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                position: relative;
+                padding-bottom: 15px;
+            ">
+                Nossos Espaços
+                <span class="position-absolute bottom-0 start-50 translate-middle-x" style="
+                    width: 80px;
+                    height: 3px;
+                    background: linear-gradient(45deg, #20252b, #9dcdd8);
+                    border-radius: 3px;
+                "></span>
+            </h1>
+            <p class="lead text-muted">Seu refugio para um bom dia de trabalho!</p>
+        </div>
+    </div>
+</div>
+
 <section class="container my-5">
   <div class="row justify-content-center">
     {% for sala in salas %}

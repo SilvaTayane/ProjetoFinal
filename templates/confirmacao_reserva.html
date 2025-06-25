@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color:rgb(105, 107, 105);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+            border: 1px solid #ddd;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color:rgb(77, 78, 77);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Reserva Confirmada!</h1>
+    </div>
+    
+    <div class="content">
+        <p>Olá {{ nome }},</p>
+        <p>Sua reserva foi confirmada para o dia <strong>{{ data }}</strong>.</p>
+        <p>Estamos ansiosos para recebê-lo(a)!</p>
+        
+        <p>Se precisar alterar ou cancelar sua reserva, entre em contato conosco.</p>
+        
+        <a href="#" class="button">Visite nosso site</a>
+        
+        <div class="footer">
+            <p>Atenciosamente,<br>Equipe Haven Coworking</p>
+            <p>Telefone:  + 01 234 567 88<br>Endereço:  New York, NY 10012, US</p>
+        </div>
+    </div>
+</body>
+</html>

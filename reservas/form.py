@@ -1,14 +1,14 @@
 from django import forms
 from .models import Reserva
-from datetime import date  # Importamos date para verificação da data atual
+from datetime import date
 
 class ReservaForm(forms.ModelForm):
     class Meta:
         model = Reserva
-        fields = ['sala_de_reserva', 'op', 'email', 'cpf', 
+        fields = ['sala_de_reserva', 'nome_completo', 'email', 'cpf', 
                  'data_reserva', 'hora_entrada', 'hora_saida']
         
-        # Personalizando os widgets
+        # Personalizando os widgets para melhor experiência do usuário
         widgets = {
             'data_reserva': forms.DateInput(attrs={'type': 'date'}),
             'hora_entrada': forms.TimeInput(attrs={'type': 'time'}),
@@ -16,7 +16,7 @@ class ReservaForm(forms.ModelForm):
             'cpf': forms.TextInput(attrs={'placeholder': '000.000.000-00'}),
         }
         
-        # Personalizando os labels
+        # Personalizando os labels (como você já tinha)
         labels = {
             'sala_de_reserva': 'Sala para Reserva',
             'nome_completo': 'Nome Completo',
@@ -25,7 +25,6 @@ class ReservaForm(forms.ModelForm):
             'hora_saida': 'Hora de Saída',
         }
         
-        # Adicionando help_texts
         help_texts = {
             'data_reserva': 'Selecione a data desejada',
         }
@@ -48,11 +47,11 @@ class ReservaForm(forms.ModelForm):
         if hora_entrada and hora_saida and hora_saida <= hora_entrada:
             raise forms.ValidationError("A hora de saída deve ser após a hora de entrada")
 
-        # Verifica se a data da reserva não é no passado (usando date.today())
+        # Verifica se a data da reserva não é no passado
         if data_reserva and data_reserva < date.today():
             raise forms.ValidationError("Não é possível reservar para datas passadas")
 
-        # Verifica se a sala já está reservada no mesmo horário
+        # Verifica conflitos de reserva
         if sala_de_reserva and data_reserva and hora_entrada and hora_saida:
             conflitos = Reserva.objects.filter(
                 sala_de_reserva=sala_de_reserva,

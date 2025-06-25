@@ -4,6 +4,9 @@ from django.core.mail import send_mail
 from django.conf import settings
 from datetime import datetime
 from reservas.form import ReservaForm
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 def VisualizarReserva(request):
     if request.method == 'POST':
@@ -12,16 +15,38 @@ def VisualizarReserva(request):
             reserva = form.save()
 
             # Enviar e-mail
+            # try:
+            #     send_mail(
+            #         subject='Confirmação de Reserva',
+            #         message=f"Olá {reserva.nome_completo}, sua reserva foi realizada com sucesso para o dia {reserva.data_reserva}.",
+            #         from_email=settings.EMAIL_HOST_USER,
+            #         recipient_list=[reserva.email],
+            #     )
+            # except Exception as e:
+            #     print("Erro ao enviar e-mail:", e)
+
             try:
-                send_mail(
-                    subject='Confirmação de Reserva',
-                    message=f"Olá {reserva.nome_completo}, sua reserva foi realizada com sucesso para o dia {reserva.data_reserva}.",
-                    from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[reserva.email],
+                # Contexto para o template
+                context = {
+                    'nome': reserva.nome_completo,
+                    'data': reserva.data_reserva,
+                    # Adicione mais variáveis conforme necessário
+                }
+                # Renderiza o template HTML
+                html_content = render_to_string('confirmacao_reserva.html', context)
+                text_content = strip_tags(html_content)
+
+                msg = EmailMultiAlternatives(
+                subject='✅ Confirmação de Reserva - [Haven Coworking]',
+                body=text_content,
+                from_email=settings.EMAIL_HOST_USER,
+                to=[reserva.email],
                 )
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
             except Exception as e:
                 print("Erro ao enviar e-mail:", e)
-
+                
             # Resposta AJAX
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return JsonResponse({

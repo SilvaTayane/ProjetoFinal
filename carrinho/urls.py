@@ -4,5 +4,6 @@ from . import views
 
 
 urlpatterns = [   
-    path('', views.visualizarCarrinho, name='carrinho'), 
+    path('', views.visualizarCarrinho, name='carrinho'),
+    path('adicionar_carrinho/<int:produto_id>/', views.adicionarCarrinho, name='adicionarCarrinho'),
     ]
