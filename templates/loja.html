@@ -1,60 +1,52 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <!-- Carrinho abaixo da navbar -->
 <div class="container-fluid">
   <div class="row justify-content-end">
-    <div
-      class="col-auto position-relative"
-      style="margin-top: -15px; margin-right: 30px"
-    >
+    <div class="col-auto position-relative" style="margin-top: -15px; margin-right: 30px">
       <a href="{% url 'carrinho' %}" class="cart-icon">
         <i class="fa fa-shopping-cart fa-2x"></i>
-        <span class="cart-badge">0</span>
+        <span class="cart-badge">{{ request.session.carrinho_itens|default:0 }}</span>
       </a>
     </div>
   </div>
 </div>
+
 <div class="container mb-4">
   <div class="row">
     <div class="col-12 text-center">
-      <h1
-        class="display-5 fw-bold text-gradient"
-        style="
-          background: linear-gradient(45deg, #333942, #515e61);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          position: relative;
-          padding-bottom: 15px;
-        "
-      >
+      <h1 class="display-5 fw-bold text-gradient" 
+          style="background: linear-gradient(45deg, #333942, #515e61);
+                 -webkit-background-clip: text;
+                 background-clip: text;
+                 color: transparent;
+                 position: relative;
+                 padding-bottom: 15px;">
         Nossos Produtos
-        <span
-          class="position-absolute bottom-0 start-50 translate-middle-x"
-          style="
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(45deg, #20252b, #9dcdd8);
-            border-radius: 3px;
-          "
-        ></span>
+        <span class="position-absolute bottom-0 start-50 translate-middle-x"
+              style="width: 80px;
+                     height: 3px;
+                     background: linear-gradient(45deg, #20252b, #9dcdd8);
+                     border-radius: 3px;"></span>
       </h1>
       <p class="lead text-muted">Um café melhora o dia!</p>
     </div>
   </div>
 </div>
+
 <section class="product-section py-3">
   <div class="container">
     <div class="row justify-content-center">
       {% for prod in produtos %}
       <div class="col-md-4 col-lg-3 mb-4">
         <div class="card h-100">
-          <!-- Imagem do produto (tamanho reduzido) -->
-          <img
-            src="{{ prod.imagens.url }}"
-            class="card-img-top img-fluid"
-            style="max-height: 180px; object-fit: contain"
-            alt="{{ prod.produto_nome }}"
-          />
+          <!-- Imagem do produto -->
+          <img src="{{ prod.imagens.url }}" 
+               class="card-img-top img-fluid" 
+               style="max-height: 180px; object-fit: contain" 
+               alt="{{ prod.produto_nome }}" />
 
           <div class="card-body d-flex flex-column p-3">
             <!-- Descrição do produto -->
@@ -64,54 +56,13 @@
             <!-- Preço do produto -->
             <div class="mt-auto">
               <h4 class="text-dark fs-5 mb-2">R$ {{ prod.preco }}</h4>
-              <!-- Botão para adicionar ao carrinho -->
-              <button
-                class="btn btn-sm btn-outline-secondary w-100 transition-all"
-              >
+              
+              <!-- Botão para adicionar ao carrinho CORRIGIDO -->
+              <a href="{% url 'adicionar_carrinho' prod.id %}" 
+                 class="btn btn-sm btn-outline-secondary w-100 transition-all btn-add-cart"
+                 data-produto-id="{{ prod.id }}">
                 <i class="bi bi-cart-plus"></i> Adicionar ao carrinho
-              </button>
-
-              <style>
-                .transition-all {
-                  transition: all 0.3s ease;
-                }
-                .transition-all:hover {
-                  transform: translateY(-2px);
-                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                }
-
-                .cart-icon {
-                  position: relative;
-                  color: #6c757d; /* cinza */
-                  display: inline-block;
-                  margin-top: 30px; /* afasta para baixo */
-                }
-
-                .cart-icon:hover {
-                  color: #495057; /* cinza mais escuro ao passar o mouse */
-                }
-
-                .cart-badge {
-                  position: absolute;
-                  top: -6px;
-                  right: -10px;
-                  background-color: #dc3545;
-                  color: white;
-                  border-radius: 50%;
-                  width: 18px;
-                  height: 18px;
-                  font-size: 10px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                }
-
-                @media (max-width: 991.98px) {
-                  .cart-icon {
-                    margin-top: 8px;
-                  }
-                }
-              </style>
+              </a>
             </div>
           </div>
         </div>
@@ -120,5 +71,89 @@
     </div>
   </div>
 </section>
+
+<style>
+  .transition-all {
+    transition: all 0.3s ease;
+  }
+  .transition-all:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .cart-icon {
+    position: relative;
+    color: #6c757d;
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: none;
+  }
+
+  .cart-icon:hover {
+    color: #495057;
+  }
+
+  .cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-add-cart.added {
+    background-color:rgb(102, 104, 103) !important;
+    color: white !important;
+  }
+
+  @media (max-width: 991.98px) {
+    .cart-icon {
+      margin-top: 8px;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Adiciona evento de clique para todos os botões de adicionar ao carrinho
+  document.querySelectorAll('.btn-add-cart').forEach(btn => {
+    btn.addEventListener('click', async function(e) {
+      e.preventDefault();
+      const produtoId = this.dataset.produtoId;
+      const originalText = this.innerHTML;
+      
+      try {
+        // Faz a requisição para adicionar ao carrinho
+        const response = await fetch(this.href);
+        
+        if (response.ok) {
+          // Atualiza o badge do carrinho
+          const badge = document.querySelector('.cart-badge');
+          badge.textContent = parseInt(badge.textContent || '0') + 1;
+          
+          // Feedback visual
+          this.innerHTML = '<i class="bi bi-check"></i> Adicionado!';
+          this.classList.add('added');
+          
+          // Volta ao normal após 2 segundos
+          setTimeout(() => {
+            this.innerHTML = originalText;
+            this.classList.remove('added');
+          }, 2000);
+        }
+      } catch (error) {
+        console.error('Erro ao adicionar ao carrinho:', error);
+      }
+    });
+  });
+});
+</script>
 
 {% endblock content %}

@@ -7,3 +7,5 @@ from .models import Sala
 def VisualizarSalas(request):
     salas = Sala.objects.all()
     return render(request, 'salas.html', {'salas': salas})
+
+    
