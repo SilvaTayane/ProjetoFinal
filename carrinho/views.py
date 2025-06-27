@@ -16,16 +16,18 @@ def visualizar_carrinho(request):
         carrinho = Carrinho.objects.get(car_id=get_car_id(request))
         car_items = CarItem.objects.filter(carrinho=carrinho, esta_disponivel=True)
         
-        # Adiciona subtotal a cada item
         for item in car_items:
-            item.subtotal = item.produto.preco * item.quantidade
+            item.subtotal = float(item.produto.preco) * item.quantidade
         
         total = sum(item.subtotal for item in car_items)
         quantidade = sum(item.quantidade for item in car_items)
         
+        # Formata para 2 casas decimais
+        total = round(total, 2)
+        
     except ObjectDoesNotExist:
         car_items = None
-        total = 0
+        total = 0.00
         quantidade = 0
 
     contexto = {

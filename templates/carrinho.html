@@ -1,86 +1,210 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <section class="section-content padding-y bg">
-<div class="container">
+  <div class="container">
+    <!-- ============================ COMPONENT 1 ================================= -->
+    <div class="row">
+      <aside class="col-lg-8">
+        <div class="card">
+          <div class="card-header bg-white border-0">
+            <h4 class="card-title mb-0">Seu carrinho!</h4>
+          </div>
+          <table class="table table-borderless table-shopping-cart">
+            <thead class="text-muted">
+              <tr class="small text-uppercase">
+                <th scope="col" width="40%">Produtos</th>
+                <th scope="col" width="20%">Quantidade</th>
+                <th scope="col" width="20%">Preço</th>
+                <th scope="col" width="10%" class="text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in car_items %}
+              <tr>
+                <td>
+                  <figure class="itemside align-items-center">
+                    <div class="aside" style="width: 80px">
+                      <img
+                        src="{{ item.produto.imagens.url }}"
+                        class="img-thumbnail img-sm"
+                        style="max-height: 60px; object-fit: contain"
+                      />
+                    </div>
+                    <figcaption class="info">
+                      <a
+                        href="{{ item.produto.get_url }}"
+                        class="title text-dark"
+                        >{{ item.produto.produto_nome }}</a
+                      >
+                      {% if item.variations.all %}
+                      <p class="text-muted small">
+                        {% for variation in item.variations.all %} {{
+                        variation.variation_category|capfirst }}: {{
+                        variation.variation_value|capfirst }}<br />
+                        {% endfor %}
+                      </p>
+                      {% endif %}
+                    </figcaption>
+                  </figure>
+                </td>
 
-<!-- ============================ COMPONENT 1 ================================= -->
+                <td>
+                  <div class="input-group input-spinner">
+                    <div class="input-group-prepend">
+                      <button
+                        class="btn btn-light"
+                        type="button"
+                        id="button-minus"
+                      >
+                        <i class="fa fa-minus"></i>
+                      </button>
+                    </div>
+                    <input type="text" class="form-control" value="1" />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-light"
+                        type="button"
+                        id="button-plus"
+                      >
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </td>
 
-<div class="row">
-	<aside class="col-lg-9">
-<div class="card">
-<table class="table table-borderless table-shopping-cart">
-<thead class="text-muted">
-<tr class="small text-uppercase">
-  <th scope="col">Product</th>
-  <th scope="col" width="120">Quantity</th>
-  <th scope="col" width="120">Price</th>
-  <th scope="col" class="text-right" width="200"> </th>
-</tr>
-</thead>
-<tbody>
-	{% for item in car_items %}
-		<tr>		
-			<td>
-				<figure class="itemside align-items-center">
-					<div class="aside"><img src="{{ item.produto.imagens.url }}" class="img-sm"></div>
-					<figcaption class="info">
-						<a href="#" class="title text-dark">{{ item.produto.produto_nome }}</a>
-						<p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
-					</figcaption>
-				</figure>
-			</td>
-			
-			<td> 
-				<div class="price-wrap"> 
-					<var class="price">$1156.00</var> 
-					<small class="text-muted"> $315.20 each </small> 
-				</div> <!-- price-wrap .// -->
-			</td>
-			<td class="text-right"> 
-			<a href="" class="btn btn-secondary"> Remove</a>
-			</td>
-		</tr>
-	{% endfor%}
-</tbody>
-</table>
-</div> <!-- card.// -->
+                <td>
+                  <div class="price-wrap">
+                    <var class="price">${{ item.sub_total }}</var>
+                    <small class="text-muted">
+                      <strong>{{ item.produto.preco }} </strong></small
+                    >
+                  </div>
+                </td>
 
-	</aside> <!-- col.// -->
-	<aside class="col-lg-3">
+                <td class="text-right">
+                  <a href="#" class="btn btn-danger">
+                    <i class="fa fa-trash"></i> Remove
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
 
-		<div class="card">
-		<div class="card-body">
-			<dl class="dlist-align">
-			  <dt>Total price:</dt>
-			  <dd class="text-right">$69.97</dd>
-			</dl>
-			<dl class="dlist-align">
-			  <dt>Tax:</dt>
-			  <dd class="text-right"> $10.00</dd>
-			</dl>
-			<dl class="dlist-align">
-			  <dt>Total:</dt>
-			  <dd class="text-right text-dark b"><strong>$59.97</strong></dd>
-			</dl>
-			<hr>
-			<p class="text-center mb-3">
-				<img src="payments.png" height="26">
-			</p>
-			<a href="./place-order.html" class="btn btn-secondary btn-block"> Checkout </a>
-			<a href="./store.html" class="btn btn-light btn-block">Continue Shopping</a>
-		</div> <!-- card-body.// -->
-		</div> <!-- card.// -->
+          <div class="card-body border-top pt-2 pb-2">
+            <!-- Reduz o padding vertical -->
+            <a href="{% url 'loja' %}" class="btn btn-light btn-sm">
+              <!-- btn-sm para botão pequeno -->
+              <i class="fa fa-chevron-left"></i> Continue Shopping
+            </a>
+          </div>
+        </div>
+        <!-- card.// -->
+      </aside>
+      <!-- col.// -->
 
-</aside> <!-- col.// -->
+      <aside class="col-lg-4">
+        <div class="card">
+          <div class="card-header bg-success text-white">
+            <!-- bg-success é o verde do Bootstrap -->
+            <h5 class="card-title mb-0">Total da compra</h5>
+          </div>
+          <div class="card-body">
+            <dl class="dlist-align mb-3">
+              <dt class="h5">Total:</dt>
+              <dd class="text-right">
+                <span class="h4 text-success font-weight-bold">
+                  R$ {{ total|floatformat:2 }}
+                </span>
+              </dd>
+            </dl>
+            <hr />
+            <div class="payment-methods mb-4">
+              <h6 class="text-center mb-3">Métodos de Pagamento</h6>
+              <div class="d-flex justify-content-around">
+                <!-- Pix -->
+                <div class="text-center">
+                  <div class="payment-icon mb-2">
+                    <i class="fas fa-qrcode fa-2x text-success"></i>
+                  </div>
+                  <span class="small">Pix</span>
+                </div>
 
+                <!-- Cartão de Crédito -->
+                <div class="text-center">
+                  <div class="payment-icon mb-2">
+                    <i class="far fa-credit-card fa-2x text-primary"></i>
+                  </div>
+                  <span class="small">Cartão</span>
+                </div>
 
-</div> <!-- row.// -->
-<!-- ============================ COMPONENT 1 END .// ================================= -->
+                <!-- Boleto -->
+                <div class="text-center">
+                  <div class="payment-icon mb-2">
+                    <i class="fas fa-barcode fa-2x text-info"></i>
+                  </div>
+                  <span class="small">Boleto</span>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-primary btn-block">
+              Proceed To Checkout
+            </a>
+          </div>
+          <!-- card-body.// -->
+        </div>
+        <!-- card.// -->
 
-</div> <!-- container .//  -->
+        {% if recommended_products %}
+        <div class="card mt-3">
+          <div class="card-header bg-white">
+            <h5 class="card-title mb-0">You May Also Like</h5>
+          </div>
+          <div class="card-body">
+            {% for product in recommended_products %}
+            <figure class="itemside mb-3">
+              <div class="aside" style="width: 60px">
+                <img
+                  src="{{ product.imagens.url }}"
+                  class="img-sm img-thumbnail"
+                  style="max-height: 50px; object-fit: contain"
+                />
+              </div>
+              <figcaption class="info">
+                <a href="{{ product.get_url }}" class="title"
+                  >{{ product.produto_nome|truncatechars:20 }}</a
+                >
+                <strong class="price">${{ item.produto.preco }}</strong>
+              </figcaption>
+            </figure>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </aside>
+      <!-- col.// -->
+    </div>
+    <!-- row.// -->
+    <!-- ============================ COMPONENT 1 END .// ================================= -->
+  </div>
+  <!-- container .//  -->
 </section>
+
+<style>
+  .payment-icon {
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 50%;
+    transition: all 0.3s;
+  }
+  .payment-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+</style>
 
 {% endblock %}
