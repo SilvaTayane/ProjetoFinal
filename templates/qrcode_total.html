@@ -1,0 +1,61 @@
+ {% extends 'base.html'%}
+ 
+ {% block content %}
+ <a href="{% url 'carrinho' %}" class="back-button">Voltar</a>
+    
+    <div class="header">
+        <h2 class="text-center text-dark fw-bold display-6" >Leia o QR Code e faça o pagamento!</h2>
+    </div>
+    
+    <div class="image-container">
+        <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code do total">
+    </div>
+        <h3 class="text-center text-dark fw-bold display-6" >Valor total R${{ total }}</h3>
+        
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 90px;
+            padding: 10px 15px;
+            background-color:rgb(61, 65, 61);
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;    
+        }
+        
+        .back-button:hover {
+            background-color:rgb(11, 14, 11);
+        }
+        
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            max-height: 80vh;
+            height: auto;
+        }
+    </style>
+{% endblock %}

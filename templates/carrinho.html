@@ -82,8 +82,11 @@
                 </td>
 
                 <td class="text-right">
-                  <a href="#" class="btn btn-danger">
-                    <i class="fa fa-trash"></i> Remove
+                  <a
+                    href="{% url 'remover_item_carrinho' item.produto.id %}"
+                    class="btn btn-danger"
+                  >
+                    <i class="fa fa-trash"></i> Remover
                   </a>
                 </td>
               </tr>
@@ -123,12 +126,18 @@
               <h6 class="text-center mb-3">Métodos de Pagamento</h6>
               <div class="d-flex justify-content-around">
                 <!-- Pix -->
-                <div class="text-center">
-                  <div class="payment-icon mb-2">
-                    <i class="fas fa-qrcode fa-2x text-success"></i>
+                <a
+                  href="{% url 'qrcode_total' total %}"
+                  target="_blank"
+                  class="text-decoration-none"
+                >
+                  <div class="text-center">
+                    <div class="payment-icon mb-2">
+                      <i class="fas fa-qrcode fa-2x text-success"></i>
+                    </div>
+                    <span class="small">Pix</span>
                   </div>
-                  <span class="small">Pix</span>
-                </div>
+                </a>
 
                 <!-- Cartão de Crédito -->
                 <div class="text-center">

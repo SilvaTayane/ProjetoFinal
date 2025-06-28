@@ -1,11 +1,12 @@
 from django.urls import path
 from . import views
+from .views import gerar_qrcode_total
 
 
 
 urlpatterns = [
     path('', views.visualizar_carrinho, name='carrinho'),
     path('adicionar/<int:produto_id>/', views.adicionar_carrinho, name='adicionar_carrinho'),
-    path('remover/<int:produto_id>/', views.remover_carrinho, name='remover_carrinho'),
-    path('remover-item/<int:produto_id>/', views.remover_item_carrinho, name='remover_item_carrinho'),
+    path('remover_item/<int:produto_id>/', views.remover_item_carrinho, name='remover_item_carrinho'),
+    path('qrcode/total/<str:total>/', views.gerar_qrcode_total, name='qrcode_total'),
 ]

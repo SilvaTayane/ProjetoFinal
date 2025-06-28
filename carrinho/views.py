@@ -1,7 +1,10 @@
+import base64
 from django.shortcuts import redirect, render, get_object_or_404
 from carrinho.models import Carrinho, CarItem
 from produtos.models import Produto
 from django.core.exceptions import ObjectDoesNotExist
+import qrcode
+from io import BytesIO
 
 app_name = 'carrinho' 
 
@@ -15,7 +18,8 @@ def visualizar_carrinho(request):
     try:
         carrinho = Carrinho.objects.get(car_id=get_car_id(request))
         car_items = CarItem.objects.filter(carrinho=carrinho, esta_disponivel=True)
-        
+        produto_carrinho = Produto.objects.all()
+
         for item in car_items:
             item.subtotal = float(item.produto.preco) * item.quantidade
         
@@ -34,6 +38,7 @@ def visualizar_carrinho(request):
         'car_items': car_items,
         'total': total,
         'quantidade': quantidade,
+        'produto_carrinho':produto_carrinho,
     }
     return render(request, 'carrinho.html', contexto)
 
@@ -58,24 +63,6 @@ def adicionar_carrinho(request, produto_id):
     
     return redirect('carrinho')
 
-def remover_carrinho(request, produto_id):
-    produto = get_object_or_404(Produto, id=produto_id)
-    carrinho = Carrinho.objects.get(car_id=get_car_id(request))
-    
-    try:
-        car_item = CarItem.objects.get(
-            produto=produto,
-            carrinho=carrinho
-        )
-        if car_item.quantidade > 1:
-            car_item.quantidade -= 1
-            car_item.save()
-        else:
-            car_item.delete()
-    except CarItem.DoesNotExist:
-        pass
-    
-    return redirect('carrinho')
 
 def remover_item_carrinho(request, produto_id):
     produto = get_object_or_404(Produto, id=produto_id)
@@ -87,3 +74,19 @@ def remover_item_carrinho(request, produto_id):
     ).delete()
     
     return redirect('carrinho')
+
+
+def gerar_qrcode_total(request, total):
+    # Gera o texto com o valor total
+    total = float(total)
+
+    # Cria o QR Code
+    qr = qrcode.make(total)
+
+    # Salva a imagem em memória
+    buffer = BytesIO()
+    qr.save(buffer, format="PNG")
+    img_base64 = base64.b64encode(buffer.getvalue()).decode()
+
+    # Passa a imagem codificada para o template
+    return render(request, 'qrcode_total.html', {'qr_code': img_base64, 'total': total})
