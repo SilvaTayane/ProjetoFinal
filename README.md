@@ -11,7 +11,7 @@
 - Uso de computadores compartilhados
 
 ### **✅ Cafeteria Online**
-- Cardápio digital com produtos (cafés, lanches, etc.)
+- Cardápio digital com produtos (cafés, lanches, etc)
 - Compra dos produtos
 
 ## **🖥️ Techs Utilizadas**

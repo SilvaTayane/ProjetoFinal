@@ -1,14 +1,32 @@
 from django import forms
-from .models import Reserva
+from .models import Reserva, Plano
 from datetime import date
 
 class ReservaForm(forms.ModelForm):
+    assinatura_plano = forms.BooleanField(
+        required=False,
+        label='Deseja assinar um Plano?',
+        widget=forms.CheckboxInput(attrs={
+            'class': 'styled-checkbox',
+            'id': 'assinaturaPlanoCheckbox'
+        })
+    )
+    
+    plano = forms.ModelChoiceField(
+        queryset=Plano.objects.all(),
+        required=False,
+        label="Escolha seu plano",
+        widget=forms.Select(attrs={
+            'class': 'form-select',
+            'id': 'id_plano'
+        })
+    )
+
     class Meta:
         model = Reserva
         fields = ['sala_de_reserva', 'nome_completo', 'email', 'cpf', 
-                 'data_reserva', 'hora_entrada', 'hora_saida']
+                 'data_reserva', 'hora_entrada', 'hora_saida', 'assinatura_plano', 'plano']
         
-        # Personalizando os widgets para melhor experiência do usuário
         widgets = {
             'data_reserva': forms.DateInput(attrs={'type': 'date'}),
             'hora_entrada': forms.TimeInput(attrs={'type': 'time'}),
@@ -16,7 +34,6 @@ class ReservaForm(forms.ModelForm):
             'cpf': forms.TextInput(attrs={'placeholder': '000.000.000-00'}),
         }
         
-        # Personalizando os labels (como você já tinha)
         labels = {
             'sala_de_reserva': 'Sala para Reserva',
             'nome_completo': 'Nome Completo',
@@ -29,9 +46,14 @@ class ReservaForm(forms.ModelForm):
             'data_reserva': 'Selecione a data desejada',
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Se for uma instância existente e tiver plano, marca o checkbox
+        if self.instance and self.instance.plano:
+            self.initial['assinatura_plano'] = True
+
     def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf') 
-        # Validação simples do formato do CPF
         if not len(cpf) == 14 or not cpf[3] == '.' or not cpf[7] == '.' or not cpf[11] == '-':
             raise forms.ValidationError("CPF deve estar no formato 000.000.000-00")
         return cpf
@@ -42,6 +64,12 @@ class ReservaForm(forms.ModelForm):
         hora_saida = cleaned_data.get('hora_saida')
         data_reserva = cleaned_data.get('data_reserva')
         sala_de_reserva = cleaned_data.get('sala_de_reserva')
+        assinatura_plano = cleaned_data.get('assinatura_plano')
+        plano = cleaned_data.get('plano')
+
+        # Validação do plano se o checkbox estiver marcado
+        if assinatura_plano and not plano:
+            self.add_error('plano', "Por favor, selecione um plano quando optar por assinar")
 
         # Verifica se a hora de saída é depois da hora de entrada
         if hora_entrada and hora_saida and hora_saida <= hora_entrada:
@@ -64,3 +92,14 @@ class ReservaForm(forms.ModelForm):
                 raise forms.ValidationError("A sala já está reservada neste horário")
 
         return cleaned_data
+
+    def save(self, commit=True):
+        reserva = super().save(commit=False)
+        if not self.cleaned_data.get('assinatura_plano'):
+            reserva.plano = None  # Remove o plano se o checkbox não estiver marcado
+        
+        if commit:
+            reserva.save()
+            self.save_m2m()
+        
+        return reserva

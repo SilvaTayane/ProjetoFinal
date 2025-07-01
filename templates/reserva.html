@@ -1,30 +1,30 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="container mb-4">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h1 class="display-5 fw-bold text-gradient" style="
-                background: linear-gradient(45deg, #333942, #515e61);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-                position: relative;
-                padding-bottom: 15px;
-            ">
-                Faça sua Reserva
-                <span class="position-absolute bottom-0 start-50 translate-middle-x" style="
-                    width: 80px;
-                    height: 3px;
-                    background: linear-gradient(45deg, #20252b, #9dcdd8);
-                    border-radius: 3px;
-                "></span>
-            </h1>
-            <p class="lead text-muted">Preencha o formulário e receberá as instruçoes!</p>
-        </div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1 class="display-5 fw-bold text-gradient" style="
+          background: linear-gradient(45deg, #333942, #515e61);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          position: relative;
+          padding-bottom: 15px;
+        ">
+        Faça sua Reserva
+        <span class="position-absolute bottom-0 start-50 translate-middle-x" style="
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(45deg, #20252b, #9dcdd8);
+            border-radius: 3px;
+          "></span>
+      </h1>
+      <p class="lead text-muted">
+        Preencha o formulário e receberá as instruções!
+      </p>
     </div>
+  </div>
 </div>
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-8 col-md-10">
@@ -34,14 +34,9 @@
         </div>
         <div class="card-body">
           <form action="{% url 'reservas' %}" method="post" class="needs-validation" novalidate>
-            {% csrf_token %}
-            
-            <!-- Exibir erros não relacionados a campos específicos -->
-            {% if form.non_field_errors %}
+            {% csrf_token %} {% if form.non_field_errors %}
             <div class="alert alert-danger">
-              {% for error in form.non_field_errors %}
-                {{ error }}
-              {% endfor %}
+              {% for error in form.non_field_errors %} {{ error }} {% endfor %}
             </div>
             {% endif %}
 
@@ -50,44 +45,41 @@
               <label for="{{ form.sala_de_reserva.id_for_label }}" class="form-label fw-bold">
                 {{ form.sala_de_reserva.label }}
               </label>
-              {{ form.sala_de_reserva }}
-              {% if form.sala_de_reserva.errors %}
-                <div class="invalid-feedback d-block">
-                  {{ form.sala_de_reserva.errors.0 }}
-                </div>
+              {{ form.sala_de_reserva }} {% if form.sala_de_reserva.errors %}
+              <div class="invalid-feedback d-block">
+                {{ form.sala_de_reserva.errors.0 }}
+              </div>
               {% endif %}
             </div>
 
             <div class="row g-3 mb-4">
-              <!-- Campo Nome -->
+              <!-- Nome -->
               <div class="col-md-6">
                 <label for="{{ form.nome_completo.id_for_label }}" class="form-label fw-bold">
                   {{ form.nome_completo.label }}
                 </label>
-                {{ form.nome_completo }}
-                {% if form.nome_completo.errors %}
-                  <div class="invalid-feedback d-block">
-                    {{ form.nome_completo.errors.0 }}
-                  </div>
+                {{ form.nome_completo }} {% if form.nome_completo.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.nome_completo.errors.0 }}
+                </div>
                 {% endif %}
               </div>
 
-              <!-- Campo Email -->
+              <!-- Email -->
               <div class="col-md-6">
                 <label for="{{ form.email.id_for_label }}" class="form-label fw-bold">
                   {{ form.email.label }}
                 </label>
-                {{ form.email }}
-                {% if form.email.errors %}
-                  <div class="invalid-feedback d-block">
-                    {{ form.email.errors.0 }}
-                  </div>
+                {{ form.email }} {% if form.email.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.email.errors.0 }}
+                </div>
                 {% endif %}
               </div>
             </div>
 
             <div class="row g-3 mb-4">
-              <!-- Campo CPF -->
+              <!-- CPF -->
               <div class="col-md-6">
                 <label for="{{ form.cpf.id_for_label }}" class="form-label fw-bold">
                   {{ form.cpf.label }}
@@ -95,53 +87,72 @@
                 {{ form.cpf }}
                 <small class="form-text text-muted">{{ form.cpf.help_text }}</small>
                 {% if form.cpf.errors %}
-                  <div class="invalid-feedback d-block">
-                    {{ form.cpf.errors.0 }}
-                  </div>
+                <div class="invalid-feedback d-block">
+                  {{ form.cpf.errors.0 }}
+                </div>
                 {% endif %}
               </div>
 
-              <!-- Campo Data -->
+              <!-- Data -->
               <div class="col-md-6">
                 <label for="{{ form.data_reserva.id_for_label }}" class="form-label fw-bold">
                   {{ form.data_reserva.label }}
                 </label>
-                {{ form.data_reserva }}
-                {% if form.data_reserva.errors %}
-                  <div class="invalid-feedback d-block">
-                    {{ form.data_reserva.errors.0 }}
-                  </div>
+                {{ form.data_reserva }} {% if form.data_reserva.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.data_reserva.errors.0 }}
+                </div>
                 {% endif %}
               </div>
             </div>
 
-            <!-- Campos de Horário -->
+            <!-- Horários -->
             <div class="row g-3 mb-4">
               <div class="col-md-6">
                 <label for="{{ form.hora_entrada.id_for_label }}" class="form-label fw-bold">
                   {{ form.hora_entrada.label }}
                 </label>
-                {{ form.hora_entrada }}
-                {% if form.hora_entrada.errors %}
-                  <div class="invalid-feedback d-block">
-                    {{ form.hora_entrada.errors.0 }}
-                  </div>
+                {{ form.hora_entrada }} {% if form.hora_entrada.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.hora_entrada.errors.0 }}
+                </div>
                 {% endif %}
               </div>
               <div class="col-md-6">
                 <label for="{{ form.hora_saida.id_for_label }}" class="form-label fw-bold">
                   {{ form.hora_saida.label }}
                 </label>
-                {{ form.hora_saida }}
-                {% if form.hora_saida.errors %}
-                  <div class="invalid-feedback d-block">
-                    {{ form.hora_saida.errors.0 }}
-                  </div>
+                {{ form.hora_saida }} {% if form.hora_saida.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.hora_saida.errors.0 }}
+                </div>
                 {% endif %}
               </div>
             </div>
 
-            <!-- Botão de Submit -->
+            <!-- Checkbox -->
+            <div class="mb-4 custom-checkbox-style">
+              <label class="d-flex align-items-center" style="cursor: pointer;">
+                <input class="styled-checkbox" type="checkbox" id="checkIndeterminate" name="assinatura_plano" />
+                <i class="fa-solid fa-check check-icon"></i>
+                <span class="ms-2">Deseja assinar um Plano?</span>
+              </label>
+            </div>
+
+            <!-- Campo que aparecerá apenas quando o checkbox estiver marcado -->
+            <div id="planoContainer" class="mt-3" style="display: none;">
+              <label for="{{ form.plano.id_for_label }}" class="form-label fw-bold">
+                {{ form.plano.label }}
+              </label>
+              {{ form.plano }}
+              {% if form.plano.errors %}
+              <div class="invalid-feedback d-block">
+                {{ form.plano.errors.0 }}
+              </div>
+              {% endif %}
+            </div>
+
+            <!-- Botão -->
             <div class="d-grid mt-5">
               <button type="submit" class="btn btn-secondary btn-lg py-3 fw-bold">
                 <i class="fas fa-calendar-check me-2"></i> Confirmar Reserva
@@ -157,86 +168,7 @@
   </div>
 </div>
 
-<!-- Adicione isso no final do seu template base ou antes de fechar o body -->
-<script>
-// Validação do frontend
-(function () {
-  'use strict'
-  
-  // Pegue todos os forms que queremos aplicar estilos de validação customizados
-  var forms = document.querySelectorAll('.needs-validation')
-  
-  // Loop sobre eles e previna submissão
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-</script>
-
-<style>
-  .card {
-    border: none;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
-  }
-  
-  .card-header {
-    padding: 1.5rem;
-    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
-  }
-  
-  .form-control, .form-select {
-    border-radius: 10px;
-    border: 2px solid #e9ecef;
-    transition: all 0.3s;
-  }
-  
-  .form-control:focus, .form-select:focus {
-    border-color: #6c757d;
-    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
-  }
-  
-  .form-control-lg {
-    font-size: 1.1rem;
-  }
-  
-  .btn-secondary {
-    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
-    border: none;
-    letter-spacing: 0.5px;
-    transition: all 0.3s;
-  }
-  
-  .btn-secondary:hover {
-    background: linear-gradient(135deg, #5a6268 0%, #495057 100%);
-    transform: translateY(-2px);
-  }
-  
-  .invalid-feedback {
-    font-size: 0.9rem;
-    color: #dc3545;
-  }
-  
-  .form-text.text-muted {
-    color: #6c757d !important;
-  }
-</style>
-<!-- Modal de Sucesso -->
+<!-- Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg">
@@ -246,15 +178,10 @@
         </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="text-center mb-4">
-          <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
-        </div>
-        <h4 class="text-center mb-3">Sua reserva foi realizada com sucesso!</h4>
-        <p class="text-center text-muted">
-          Você receberá um e-mail de confirmação com os detalhes da sua reserva.
-          Caso precise de alguma alteração, entre em contato conosco.
-        </p>
+      <div class="modal-body text-center">
+        <i class="fas fa-check-circle text-success" style="font-size: 5rem"></i>
+        <h4 class="mt-3">Sua reserva foi realizada com sucesso!</h4>
+        <p class="text-muted">Você receberá um e-mail com os detalhes.</p>
       </div>
       <div class="modal-footer justify-content-center bg-light">
         <button type="button" class="btn btn-success px-4 py-2 fw-bold" data-bs-dismiss="modal">
@@ -265,83 +192,173 @@
   </div>
 </div>
 
-<!-- Script para mostrar o modal após envio do formulário -->
+<!-- Scripts -->
+<!-- Adicione este script após o script existente -->
 <script>
-// Substitua o script principal por este:
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.querySelector('.needs-validation');
-  
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    if (form.checkValidity()) {
-      // Envia o formulário via AJAX
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-          successModal.show();
-          form.reset();
-          form.classList.remove('was-validated');
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector(".needs-validation");
+    const checkbox = document.getElementById('checkIndeterminate');
+    const planoContainer = document.getElementById('planoContainer');
+
+    // Controle da exibição do campo de planos
+    if (checkbox && planoContainer) {
+      checkbox.addEventListener('change', function () {
+        if (this.checked) {
+          planoContainer.style.display = 'block';
         } else {
-          // Mostrar erros do servidor
-          alert(data.error || 'Ocorreu um erro ao processar sua reserva.');
+          planoContainer.style.display = 'none';
+          // Limpa a seleção quando desmarcado
+          const planoSelect = document.getElementById('{{ form.plano.id_for_label }}');
+          if (planoSelect) planoSelect.value = '';
         }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('Ocorreu um erro de conexão.');
       });
+
+      // Verifica se já está marcado ao carregar (para caso de edição)
+      if (checkbox.checked) {
+        planoContainer.style.display = 'block';
+      }
     }
-    
-    form.classList.add('was-validated');
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (form.checkValidity()) {
+        fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+              .value,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              new bootstrap.Modal(
+                document.getElementById("successModal")
+              ).show();
+              form.reset();
+              form.classList.remove("was-validated");
+              // Esconde o container após submit
+              if (planoContainer) planoContainer.style.display = 'none';
+            } else {
+              alert(data.error || "Erro ao processar sua reserva.");
+            }
+          })
+          .catch(() => alert("Erro de conexão."));
+      }
+
+      form.classList.add("was-validated");
+    });
   });
-});
 </script>
 
-<!-- Estilo adicional para o modal -->
+<!-- Estilo extra -->
 <style>
-  .modal-content {
+  .card {
+    border: none;
     border-radius: 15px;
     overflow: hidden;
-    border: none;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
-  
-  .modal-header {
-    padding: 1.5rem;
-    background: linear-gradient(135deg,rgb(84, 87, 85) 0%,rgb(55, 56, 55) 100%);
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
   }
-  
-  .modal-title {
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  
-  .modal-body {
-    padding: 2rem;
-  }
-  
-  .btn-success {
-    background: linear-gradient(135deg,rgb(97, 97, 97) 0%,rgb(93, 97, 94) 100%);
-    border: none;
+
+  .form-control,
+  .form-select {
     border-radius: 10px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.1rem;
+    border: 2px solid #e9ecef;
     transition: all 0.3s;
   }
-  
-  .btn-success:hover {
-    background: linear-gradient(135deg,rgb(70, 71, 70) 0%,rgb(61, 65, 62) 100%);
+
+  .form-control:focus,
+  .form-select:focus {
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+  }
+
+  .btn-secondary {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    border: none;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover {
+    background: linear-gradient(135deg, #5a6268 0%, #495057 100%);
     transform: translateY(-2px);
   }
-</style>
 
+  .styled-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+    left: 0;
+    top: 2px;
+  }
+
+  .styled-checkbox:checked {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+
+  /* Ajuste o posicionamento do ícone */
+  .check-icon {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    font-size: 12px;
+    color: white;
+    pointer-events: none;
+    display: none;
+    z-index: 1;
+  }
+
+  .styled-checkbox:checked+.check-icon {
+    display: block;
+  }
+
+  /* Adicione estas regras ao seu CSS existente */
+  .custom-checkbox-style {
+    position: relative;
+    padding-left: 30px;
+    min-height: 24px;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+
+  #planoContainer {
+    transition: all 0.3s ease;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #6c757d;
+    margin-top: 10px;
+  }
+
+  #planoContainer select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+  }
+
+  /* Mantenha os estilos existentes e adicione este para o label do checkbox */
+  .custom-checkbox-style span {
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+</style>
 {% endblock %}
