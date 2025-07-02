@@ -1,141 +1,236 @@
-{%  extends 'base.html' %}
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="container mb-4">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h1 class="display-5 fw-bold text-gradient" style="
-                background: linear-gradient(45deg, #333942, #515e61);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-                position: relative;
-                padding-bottom: 15px;
-            ">
-                Nossos Espaços
-                <span class="position-absolute bottom-0 start-50 translate-middle-x" style="
-                    width: 80px;
-                    height: 3px;
-                    background: linear-gradient(45deg, #20252b, #9dcdd8);
-                    border-radius: 3px;
-                "></span>
-            </h1>
-            <p class="lead text-muted">Seu refugio para um bom dia de trabalho!</p>
-        </div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1
+        class="display-5 fw-bold text-gradient"
+        style="
+          background: linear-gradient(45deg, #333942, #515e61);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          position: relative;
+          padding-bottom: 15px;
+        "
+      >
+        Nossos Espaços
+        <span
+          class="position-absolute bottom-0 start-50 translate-middle-x"
+          style="
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(45deg, #20252b, #9dcdd8);
+            border-radius: 3px;
+          "
+        ></span>
+      </h1>
+      <p class="lead text-muted">Seu refugio para um bom dia de trabalho!</p>
     </div>
+  </div>
 </div>
 
 <section class="container my-5">
-    <div class="row align-items-center">
-        <!-- Imagem ampliada -->
-        <div class="col-md-6 mb-4 mb-md-0 p-0 overflow-hidden">
-            <img src="{% static '/semfundo.png' %}" 
-                 alt="Imagem ampliada" 
-                 class="enhanced-image">
-        </div>
-        
-        <!-- Texto -->
-        <div class="col-md-6 ps-md-5">
-    <h2 class="fw-bold display-6">Conheça os espaços do <span class="text-secondary">Haven Coworking & Coffee</span></h2>
-    
-    <p class="mt-4 fs-5">
-        <strong>No Haven</strong>, cada detalhe foi cuidadosamente pensado para oferecer um ambiente <em>inspirador</em>, <em>tranquilo</em> e <em>funcional</em>.
-    </p>
-    
-    <p class="fs-5">
-        Nossa área principal conta com <strong>mesas individuais e coletivas</strong>, todas equipadas com notebooks e uma <span class="ttext-secondary">iluminação aconchegante</span> — perfeita para quem busca <strong>produtividade com conforto</strong>.
-    </p>
-</div>
-
+  <div class="row align-items-center">
+    <!-- Imagem ampliada -->
+    <div class="col-md-6 mb-4 mb-md-0 p-0 overflow-hidden">
+      <img
+        src="{% static '/semfundo.png' %}"
+        alt="Imagem ampliada"
+        class="enhanced-image"
+      />
     </div>
+
+    <!-- Texto -->
+    <div class="col-md-6 ps-md-5">
+      <h2 class="fw-bold display-6">
+        Conheça os espaços do
+        <span class="text-secondary">Haven Coworking & Coffee</span>
+      </h2>
+
+      <p class="mt-4 fs-5">
+        <strong>No Haven</strong>, cada detalhe foi cuidadosamente pensado para
+        oferecer um ambiente <em>inspirador</em>, <em>tranquilo</em> e
+        <em>funcional</em>.
+      </p>
+
+      <p class="fs-5">
+        Nossa área principal conta com
+        <strong>mesas individuais e coletivas</strong>, todas equipadas com
+        notebooks e uma
+        <span class="ttext-secondary">iluminação aconchegante</span> — perfeita
+        para quem busca <strong>produtividade com conforto</strong>.
+      </p>
+    </div>
+  </div>
 </section>
 
 <style>
+  .enhanced-image {
+    width: 120%; /* Extende além do container */
+    max-width: none;
+    height: auto;
+    margin-left: -10%; /* Centraliza o overflow */
+    transition: transform 0.5s;
+  }
+
+  .enhanced-image:hover {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 768px) {
     .enhanced-image {
-        width: 120%; /* Extende além do container */
-        max-width: none;
-        height: auto;
-        margin-left: -10%; /* Centraliza o overflow */
-        transition: transform 0.5s;
+      width: 100%;
+      margin-left: 0;
     }
-    
-    .enhanced-image:hover {
-        transform: scale(1.03);
-    }
-    
-    @media (max-width: 768px) {
-        .enhanced-image {
-            width: 100%;
-            margin-left: 0;
-        }
-    }
+  }
 </style>
 <!-- Seção com imagem de fundo -->
-<section class="container-fluid p-0 my-5"> <!-- container-fluid e p-0 para remover padding -->
-    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{% static '/escritorio-flexivel.jpg' %}" class="d-block w-100 vh-100" alt="Imagem 1" style="object-fit: cover;">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static '/im1.jpg' %}" class="d-block w-100 vh-80" alt="Imagem 2" style="object-fit: cover;">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static '/escritorio-flexivel.jpg' %}" class="d-block w-100 vh-100" alt="Imagem 3" style="object-fit: cover;">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static '/cabine.webp' %}" class="d-block w-100 vh-100" alt="Imagem 4" style="object-fit: cover;">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static '/w-multiuso134.jpg' %}" class="d-block w-100 vh-100" alt="Imagem 4" style="object-fit: cover;">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static '/salinha.jpg' %}" class="d-block w-100 vh-100" alt="Imagem 4" style="object-fit: cover;">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Próximo</span>
-        </button>
+<section class="container-fluid p-0 my-5">
+  <!-- container-fluid e p-0 para remover padding -->
+  <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img
+          src="{% static '/escritorio-flexivel.jpg' %}"
+          class="d-block w-100 vh-100"
+          alt="Imagem 1"
+          style="object-fit: cover"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          src="{% static '/im1.jpg' %}"
+          class="d-block w-100 vh-80"
+          alt="Imagem 2"
+          style="object-fit: cover"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          src="{% static '/escritorio-flexivel.jpg' %}"
+          class="d-block w-100 vh-100"
+          alt="Imagem 3"
+          style="object-fit: cover"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          src="{% static '/cabine.webp' %}"
+          class="d-block w-100 vh-100"
+          alt="Imagem 4"
+          style="object-fit: cover"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          src="{% static '/w-multiuso134.jpg' %}"
+          class="d-block w-100 vh-100"
+          alt="Imagem 4"
+          style="object-fit: cover"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          src="{% static '/salinha.jpg' %}"
+          class="d-block w-100 vh-100"
+          alt="Imagem 4"
+          style="object-fit: cover"
+        />
+      </div>
     </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#imageCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#imageCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Próximo</span>
+    </button>
+  </div>
 </section>
 
 <style>
-    /* Garante que o carrossel ocupe toda a largura */
-    .container-fluid {
-        max-width: 100%;
-        padding-right: 0;
-        padding-left: 0;
-    }
-    
-    /* Opcional: Ajuste a altura conforme necessário */
+  /* Garante que o carrossel ocupe toda a largura */
+  .container-fluid {
+    max-width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* Opcional: Ajuste a altura conforme necessário */
+  .carousel-item {
+    height: 100vh; /* Ou um valor fixo como 600px */
+  }
+
+  /* Melhora a visualização em telas pequenas */
+  @media (max-width: 768px) {
     .carousel-item {
-        height: 100vh; /* Ou um valor fixo como 600px */
+      height: 50vh;
     }
-    
-    /* Melhora a visualização em telas pequenas */
-    @media (max-width: 768px) {
-        .carousel-item {
-            height: 50vh;
-        }
-    }
+  }
 </style>
 
 <script>
-    // Configuração para trocar automaticamente a cada 5 segundos
-    document.addEventListener('DOMContentLoaded', function() {
-        var myCarousel = document.getElementById('imageCarousel');
-        var carousel = new bootstrap.Carousel(myCarousel, {
-            interval: 5000,
-            wrap: true
-        });
+  // Configuração para trocar automaticamente a cada 5 segundos
+  document.addEventListener("DOMContentLoaded", function () {
+    var myCarousel = document.getElementById("imageCarousel");
+    var carousel = new bootstrap.Carousel(myCarousel, {
+      interval: 5000,
+      wrap: true,
     });
+  });
 </script>
-  
+<section class="container-fluid p-0 my-5">
+  <div class="container mb-4">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1
+          class="display-5 fw-bold text-gradient"
+          style="
+            background: linear-gradient(45deg, #333942, #515e61);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            padding-bottom: 15px;
+          "
+        >
+          Nossa Localização
+          <span
+            class="position-absolute bottom-0 start-50 translate-middle-x"
+            style="
+              width: 80px;
+              height: 3px;
+              background: linear-gradient(45deg, #20252b, #9dcdd8);
+              border-radius: 3px;
+            "
+          ></span>
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3167.4511128419854!2d-56.10162722576988!3d-15.593045318027531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x939db19096eba401%3A0xd69b7fd0801be52e!2sIFMT%20Instituto%20Federal%20de%20Mato%20Grosso!5e1!3m2!1spt-BR!2sbr!4v1751476431955!5m2!1spt-BR!2sbr"
+      width="600"
+      height="450"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    >
+    </iframe>
+  </div>
+</section>
 
 {% endblock content %}

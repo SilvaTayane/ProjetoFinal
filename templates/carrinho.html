@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-
+<br>
 <section class="section-content padding-y bg">
   <div class="container">
     <!-- ============================ COMPONENT 1 ================================= -->
@@ -15,7 +15,7 @@
                 <th scope="col" width="40%">Produtos</th>
                 <th scope="col" width="20%">Quantidade</th>
                 <th scope="col" width="20%">Preço</th>
-                <th scope="col" width="10%" class="text-right">Action</th>
+                <th scope="col" width="10%" class="text-right">Açao</th>
               </tr>
             </thead>
             <tbody>
@@ -98,7 +98,7 @@
             <!-- Reduz o padding vertical -->
             <a href="{% url 'loja' %}" class="btn btn-light btn-sm">
               <!-- btn-sm para botão pequeno -->
-              <i class="fa fa-chevron-left"></i> Continue Shopping
+              <i class="fa fa-chevron-left"></i> Continuar comprando
             </a>
           </div>
         </div>
@@ -197,10 +197,52 @@
     <!-- ============================ COMPONENT 1 END .// ================================= -->
   </div>
   <!-- container .//  -->
+   <!-- Adicione isso antes do fechamento da seção -->
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header bg-white">
+      <h5 class="card-title mb-0">Opções de Entrega</h5>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <p class="mb-3">Como deseja receber seu pedido?</p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="deliveryOption" id="pickupInStore" value="pickup" checked>
+          <label class="form-check-label" for="pickupInStore">
+            Retirar na Balcão
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="deliveryOption" id="homeDelivery" value="delivery">
+          <label class="form-check-label" for="homeDelivery">
+            Entrega em domicílio
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Mantenha o estilo existente -->
+
 </section>
 
 <style>
   .payment-icon {
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 50%;
+    transition: all 0.3s;
+  }
+  .payment-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+   .payment-icon {
     width: 50px;
     height: 50px;
     display: inline-flex;
