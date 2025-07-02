@@ -1,6 +1,7 @@
 from django.db import models
 from salas.models import Sala
-
+from planos.models import Plano
+'''
 # Adicione este modelo se ainda não existir
 class Plano(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome do Plano")
@@ -20,9 +21,9 @@ class Plano(models.Model):
         verbose_name = "Plano"
         verbose_name_plural = "Planos"
         ordering = ['preco']
-
     def __str__(self):
-        return f"{self.nome} (R${self.preco}/mês)"
+        return f"{self.nome} (R${self.preco}/mês)"'''
+
 
 class Reserva(models.Model):
     sala_de_reserva = models.ForeignKey(
@@ -83,7 +84,7 @@ class Reserva(models.Model):
         verbose_name_plural = "Reservas"
 
     def __str__(self):
-        plano_info = f" - Plano: {self.plano.nome}" if self.plano else ""
+        plano_info = f" - Plano: {self.plano.tipo_plano}" if self.plano else ""
         return f"{self.nome_completo} - {self.sala_de_reserva} em {self.data_reserva}{plano_info}"
     
     def save(self, *args, **kwargs):
