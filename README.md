@@ -2,15 +2,15 @@
 
 <h2>HAVEN COWORKING E COFFE</h2>
 <div align="center">
-  <img src="Captura de tela 2025-04-11 135256.png" alt="Logo Haven Coworking" width="300">
+  <img src="logo.png" alt="Logo Haven Coworking" width="300">
 </div>
 
 ## **✨ Funcionalidades**
 
 ### **✅ Agendamentos**
-- Reserva de mesas individuais
-- Aluguel de salas de reunião por período
-- Uso de computadores compartilhados
+- Aluguel de salas
+- Reserva de mesas individuais com computadores
+- Adquirir planos: semanais, mensais ou semestrais
 
 ### **✅ Cafeteria Online**
 - Cardápio digital com produtos (cafés, lanches, etc)
